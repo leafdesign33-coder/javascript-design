@@ -3,8 +3,8 @@
 
   // Array mit Objekten, die den SVG-Code als navIcon enthalten
   const root = [
-    { name: "javascript-design", navIcon: "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M12 2L4 20h16L12 2z' fill='green'/></svg>" },
-    { name: "html-design", navIcon: "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M5 3v18h14V3H5z' fill='orange'/></svg>" },
+    { name: "javascript-design"},
+    { navIcon: "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M5 3v18h14V3H5z' fill='orange'/></svg>" },
     { name: "css-design", navIcon: "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M10 2v20h4V2h-4z' fill='blue'/></svg>" }
   ];
 
