@@ -1,71 +1,106 @@
 (function() {
   "use strict";
 
-  // Korrekt strukturierte Daten für die Navigation
+  // Navigation data
   const rootArray = [
     { 
-      name: "Javascript-design",  // Titel der Navigation
-      nav: [  // Array der Navigationseinträge
-        {
-          name: "Startseite",  // Navigationseintrag für Startseite
-          navIcon: ""  // Kein Icon für "Startseite"
-        },
-        {
-          name: "Über uns",  // Navigationseintrag für Über uns
-          navIcon: ""  // Kein Icon für "Über uns"
-        },
-        {
-          name: "Leistungen",  // Navigationseintrag für Leistungen
-          navIcon: ""  // Kein Icon für "Leistungen"
-        },
-        {
-          name: "Referenzen",  // Navigationseintrag für Referenzen
-          navIcon: ""  // Kein Icon für "Referenzen"
-        },
-        {
-          name: "Kontakt",  // Navigationseintrag für Kontakt
-          navIcon: ""  // Kein Icon für "Kontakt"
-        }
+      name: "Javascript-design",
+      nav: [
+        { name: "Startseite", navIcon: "" },
+        { name: "Über uns", navIcon: "" },
+        { name: "Leistungen", navIcon: "" },
+        { name: "Referenzen", navIcon: "" },
+        { name: "Kontakt", navIcon: "" }
       ]
     }
   ];
 
-  // Container, in den die Navigation eingefügt wird
   const container = document.getElementById('root');
-  const navContainer = document.createElement('nav');
+  if (!container) return;
 
-  // Iteriere über das rootArray
+  // --- Hamburger icon ---
+  const hamburger = document.createElement('div');
+  hamburger.id = 'hamburger';
+  hamburger.style.width = '35px';
+  hamburger.style.height = '25px';
+  hamburger.style.display = 'flex';
+  hamburger.style.flexDirection = 'column';
+  hamburger.style.justifyContent = 'space-between';
+  hamburger.style.cursor = 'pointer';
+  hamburger.style.marginBottom = '15px';
+
+  for (let i = 0; i < 3; i++) {
+    const bar = document.createElement('span');
+    bar.style.height = '4px';
+    bar.style.width = '100%';
+    bar.style.background = '#1a73e8';
+    bar.style.borderRadius = '2px';
+    bar.style.transition = 'all 0.3s ease';
+    hamburger.appendChild(bar);
+  }
+
+  container.appendChild(hamburger);
+
+  // --- Full screen overlay nav ---
+  const fullNav = document.createElement('div');
+  fullNav.id = 'full-nav';
+  fullNav.style.position = 'fixed';
+  fullNav.style.top = '0';
+  fullNav.style.left = '0';
+  fullNav.style.width = '100%';
+  fullNav.style.height = '100%';
+  fullNav.style.background = 'rgba(17,17,17,0.95)';
+  fullNav.style.color = '#fff';
+  fullNav.style.display = 'flex';
+  fullNav.style.flexDirection = 'column';
+  fullNav.style.alignItems = 'center';
+  fullNav.style.justifyContent = 'center';
+  fullNav.style.gap = '30px';
+  fullNav.style.transform = 'translateY(-100%)';
+  fullNav.style.transition = 'transform 0.4s ease';
+  fullNav.style.zIndex = '10000';
+
+  // Populate nav items from rootArray
   rootArray.forEach(rootItem => {
-    const sectionTitle = document.createElement('h1');
-    sectionTitle.textContent = rootItem.name;  // Zeigt den Titel der Navigation (z.B. "Hauptnavigation")
-    navContainer.appendChild(sectionTitle);
-
-    // Iteriere über das nav-Array, um Navigationseinträge zu erstellen
     rootItem.nav.forEach(item => {
       const navItem = document.createElement('div');
       navItem.classList.add('nav-item');
-
-      const iconContainer = document.createElement('span');
-      
-      // Prüfe, ob ein navIcon vorhanden ist
-      if (item.navIcon) {
-        iconContainer.innerHTML = item.navIcon;  // SVG direkt einfügen
-      }
-
-      // Füge den Namen des Navigationseintrags hinzu
-      const name = document.createElement('span');
-      name.textContent = item.name || '';
-
-      // Füge sowohl das Icon als auch den Namen in das navItem ein
-      navItem.appendChild(iconContainer);
-      navItem.appendChild(name);
-
-      // Füge das navItem dem navContainer hinzu
-      navContainer.appendChild(navItem);
+      navItem.textContent = item.name || '';
+      navItem.style.fontSize = '2rem';
+      navItem.style.cursor = 'pointer';
+      navItem.addEventListener('mouseenter', () => {
+        navItem.style.color = '#1a73e8';
+      });
+      navItem.addEventListener('mouseleave', () => {
+        navItem.style.color = '#fff';
+      });
+      fullNav.appendChild(navItem);
     });
   });
 
-  // Füge den gesamten navContainer in den Root-Container ein
-  container.appendChild(navContainer);
+  document.body.appendChild(fullNav);
+
+  // Toggle full nav on hamburger click
+  hamburger.addEventListener('click', () => {
+    fullNav.classList.toggle('open');
+    if (fullNav.classList.contains('open')) {
+      fullNav.style.transform = 'translateY(0)';
+    } else {
+      fullNav.style.transform = 'translateY(-100%)';
+    }
+
+    // Animate hamburger into X
+    hamburger.classList.toggle('open');
+    const bars = hamburger.querySelectorAll('span');
+    if (hamburger.classList.contains('open')) {
+      bars[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+      bars[1].style.opacity = '0';
+      bars[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+    } else {
+      bars[0].style.transform = 'rotate(0) translate(0,0)';
+      bars[1].style.opacity = '1';
+      bars[2].style.transform = 'rotate(0) translate(0,0)';
+    }
+  });
 
 })();
