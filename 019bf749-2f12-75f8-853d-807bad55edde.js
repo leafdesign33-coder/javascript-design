@@ -4,7 +4,7 @@
   // Korrekt strukturierte Daten für die Navigation
   const rootArray = [
     { 
-      name: "Hauptnavigation",  // Titel der Navigation
+      name: "Javascript-design",  // Titel der Navigation
       nav: [  // Array der Navigationseinträge
         {
           name: "Startseite",  // Navigationseintrag für Startseite
