@@ -8,8 +8,8 @@
       navIcon: "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M5 3v18h14V3H5z' fill='orange'/></svg>"
     },
     {
-      name: "css-design",
-      navIcon: "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M10 2v20h4V2h-4z' fill='blue'/></svg>"
+      name: "",
+      navIcon: ""
     },
     // Adding a new nav item for bar icon (hamburger menu)
     {
